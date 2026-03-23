@@ -21,16 +21,12 @@ When AI encounters uncertainty, it follows a 4-level protocol: research the code
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) >= 20
-- [OpenSpec](https://github.com/Fission-AI/OpenSpec) CLI installed globally:
-  ```bash
-  npm install -g openspec
-  ```
 - An IDE with an AI agent that supports OpenSpec slash commands (Claude Code, Cursor, etc.)
 
 ## Installation
 
 ```bash
-npx github:siyuqian/flow-engine init
+npx @siyuqian/flow-engine init
 ```
 
 This command:
@@ -108,15 +104,15 @@ If the pipeline is interrupted (IDE crash, token limit, etc.), just re-run `/ops
 
 ```bash
 # Initialize flow-engine in a project
-npx github:siyuqian/flow-engine init
+npx @siyuqian/flow-engine init
 
 # All OpenSpec CLI commands are proxied:
-npx github:siyuqian/flow-engine list
-npx github:siyuqian/flow-engine show <name>
-npx github:siyuqian/flow-engine status --change <name>
-npx github:siyuqian/flow-engine validate
-npx github:siyuqian/flow-engine archive <name>
-npx github:siyuqian/flow-engine schema <subcommand>
+npx @siyuqian/flow-engine list
+npx @siyuqian/flow-engine show <name>
+npx @siyuqian/flow-engine status --change <name>
+npx @siyuqian/flow-engine validate
+npx @siyuqian/flow-engine archive <name>
+npx @siyuqian/flow-engine schema <subcommand>
 ```
 
 ## Custom Schema
