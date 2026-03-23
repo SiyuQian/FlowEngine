@@ -1,6 +1,6 @@
 {
   "name": "@siyuqian/flow-engine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fully automated spec-driven development workflow built on OpenSpec",
   "type": "module",
   "files": [
