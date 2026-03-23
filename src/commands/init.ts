@@ -1,7 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isOpenSpecInstalled, runOpenSpec } from '../utils/openspec.js';
+import { runOpenSpec } from '../utils/openspec.js';
+import { generateSkillContent, generateCommandFile } from '../skills/generation.js';
+import { getFlowEngineSkills } from '../skills/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -19,14 +21,7 @@ export function getTemplatesDir(projectRoot: string): string {
 const AUTOMATION_TEMPLATES = ['implement.md', 'test.md', 'verify.md', 'review.md'];
 
 export async function initCommand(projectRoot: string): Promise<void> {
-  // 1. Check openspec is installed
-  if (!isOpenSpecInstalled()) {
-    console.error('Error: openspec CLI is not installed.');
-    console.error('Install it with: npm install -g openspec');
-    process.exit(1);
-  }
-
-  // 2. Initialize openspec if needed
+  // 1. Initialize openspec if needed
   const openspecDir = path.join(projectRoot, 'openspec');
   if (!fs.existsSync(openspecDir)) {
     console.log('Initializing OpenSpec...');
@@ -74,6 +69,22 @@ export async function initCommand(projectRoot: string): Promise<void> {
     fs.writeFileSync(configPath, 'schema: flow-engine\n');
   }
   console.log('✓ config.yaml updated (schema: flow-engine)');
+
+  // 7. Generate and install flow-engine skills and commands
+  const claudeDir = path.join(projectRoot, '.claude');
+  const skillsDir = path.join(claudeDir, 'skills');
+  const commandsDir = path.join(claudeDir, 'commands', 'flow-engine');
+
+  for (const entry of getFlowEngineSkills()) {
+    const skillFile = path.join(skillsDir, entry.skillDirName, 'SKILL.md');
+    fs.mkdirSync(path.dirname(skillFile), { recursive: true });
+    fs.writeFileSync(skillFile, generateSkillContent(entry.skill));
+
+    const commandFile = path.join(commandsDir, `${entry.commandId}.md`);
+    fs.mkdirSync(path.dirname(commandFile), { recursive: true });
+    fs.writeFileSync(commandFile, generateCommandFile(entry.command));
+  }
+  console.log('✓ flow-engine skills and commands installed');
 
   console.log("\nflow-engine initialized. Use '/opsx:propose <name>' in your IDE to start.");
 }

@@ -21,22 +21,19 @@ When AI encounters uncertainty, it follows a 4-level protocol: research the code
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) >= 20
-- [OpenSpec](https://github.com/Fission-AI/OpenSpec) CLI installed globally:
-  ```bash
-  npm install -g openspec
-  ```
 - An IDE with an AI agent that supports OpenSpec slash commands (Claude Code, Cursor, etc.)
 
 ## Installation
 
 ```bash
-npx github:siyuqian/flow-engine init
+npx @siyuqian/flow-engine init
 ```
 
 This command:
 1. Initializes OpenSpec in your project (if not already done)
 2. Installs the `flow-engine` custom schema with automation templates
 3. Sets `flow-engine` as the default schema
+4. Installs `/flow-engine:archive` and `/flow-engine:update-docs` skills and commands
 
 ## Usage
 
@@ -82,11 +79,23 @@ Read the reports directly:
 
 ### 4. Archive when done
 
-```bash
-npx github:siyuqian/flow-engine archive add-user-auth
+```
+> /flow-engine:archive add-user-auth
 ```
 
 Delta specs merge into your main specs. The change (with all reports) moves to archive.
+
+After archiving, you'll be prompted to update project documentation:
+
+```
+> /flow-engine:update-docs add-user-auth
+```
+
+This reviews README.md, CLAUDE.md, and AGENTS.md against the archived change and suggests updates. You can also run it independently at any time for a full documentation review:
+
+```
+> /flow-engine:update-docs
+```
 
 ## Resuming After Interruption
 
@@ -96,15 +105,15 @@ If the pipeline is interrupted (IDE crash, token limit, etc.), just re-run `/ops
 
 ```bash
 # Initialize flow-engine in a project
-npx github:siyuqian/flow-engine init
+npx @siyuqian/flow-engine init
 
 # All OpenSpec CLI commands are proxied:
-npx github:siyuqian/flow-engine list
-npx github:siyuqian/flow-engine show <name>
-npx github:siyuqian/flow-engine status --change <name>
-npx github:siyuqian/flow-engine validate
-npx github:siyuqian/flow-engine archive <name>
-npx github:siyuqian/flow-engine schema <subcommand>
+npx @siyuqian/flow-engine list
+npx @siyuqian/flow-engine show <name>
+npx @siyuqian/flow-engine status --change <name>
+npx @siyuqian/flow-engine validate
+npx @siyuqian/flow-engine archive <name>
+npx @siyuqian/flow-engine schema <subcommand>
 ```
 
 ## Custom Schema

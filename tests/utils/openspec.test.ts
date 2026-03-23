@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isOpenSpecInstalled, runOpenSpec, OPENSPEC_COMMANDS } from '../../src/utils/openspec.js';
+import { runOpenSpec, OPENSPEC_COMMANDS } from '../../src/utils/openspec.js';
 
 describe('OPENSPEC_COMMANDS', () => {
   it('includes expected commands', () => {
@@ -20,9 +20,3 @@ describe('OPENSPEC_COMMANDS', () => {
   });
 });
 
-describe('isOpenSpecInstalled', () => {
-  it('returns a boolean', () => {
-    const result = isOpenSpecInstalled();
-    expect(typeof result).toBe('boolean');
-  });
-});
