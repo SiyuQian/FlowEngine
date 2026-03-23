@@ -30,7 +30,7 @@ export async function initCommand(projectRoot: string): Promise<void> {
   const openspecDir = path.join(projectRoot, 'openspec');
   if (!fs.existsSync(openspecDir)) {
     console.log('Initializing OpenSpec...');
-    runOpenSpec(['init', projectRoot]);
+    runOpenSpec(['init', '--tools', 'none', projectRoot]);
     console.log('✓ openspec initialized');
   }
 
