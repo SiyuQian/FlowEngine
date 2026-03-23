@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isOpenSpecInstalled, runOpenSpec } from '../utils/openspec.js';
+import { runOpenSpec } from '../utils/openspec.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -19,14 +19,7 @@ export function getTemplatesDir(projectRoot: string): string {
 const AUTOMATION_TEMPLATES = ['implement.md', 'test.md', 'verify.md', 'review.md'];
 
 export async function initCommand(projectRoot: string): Promise<void> {
-  // 1. Check openspec is installed
-  if (!isOpenSpecInstalled()) {
-    console.error('Error: openspec CLI is not installed.');
-    console.error('Install it with: npm install -g openspec');
-    process.exit(1);
-  }
-
-  // 2. Initialize openspec if needed
+  // 1. Initialize openspec if needed
   const openspecDir = path.join(projectRoot, 'openspec');
   if (!fs.existsSync(openspecDir)) {
     console.log('Initializing OpenSpec...');
