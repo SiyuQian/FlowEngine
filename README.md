@@ -33,6 +33,7 @@ This command:
 1. Initializes OpenSpec in your project (if not already done)
 2. Installs the `flow-engine` custom schema with automation templates
 3. Sets `flow-engine` as the default schema
+4. Installs `/flow-engine:archive` and `/flow-engine:update-docs` skills and commands
 
 ## Usage
 
