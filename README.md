@@ -82,11 +82,23 @@ Read the reports directly:
 
 ### 4. Archive when done
 
-```bash
-npx github:siyuqian/flow-engine archive add-user-auth
+```
+> /flow-engine:archive add-user-auth
 ```
 
 Delta specs merge into your main specs. The change (with all reports) moves to archive.
+
+After archiving, you'll be prompted to update project documentation:
+
+```
+> /flow-engine:update-docs add-user-auth
+```
+
+This reviews README.md, CLAUDE.md, and AGENTS.md against the archived change and suggests updates. You can also run it independently at any time for a full documentation review:
+
+```
+> /flow-engine:update-docs
+```
 
 ## Resuming After Interruption
 
