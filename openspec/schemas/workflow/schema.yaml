@@ -23,6 +23,19 @@ artifacts:
     requires:
       - proposal
 
+  - id: brainstorm-review
+    generates: brainstorm-review.md
+    description: User reviews brainstorm approaches and selects or refines direction
+    template: brainstorm-review.md
+    instruction: |
+      Present a concise summary of each brainstorm approach to the user.
+      Use the AskUserQuestion tool to ask which approach they prefer,
+      or if they want to modify or combine approaches.
+      Record their decision and any additional constraints or feedback.
+      Do NOT proceed without explicit user input.
+    requires:
+      - brainstorm
+
   - id: design
     generates: design.md
     description: Detail the technical approach based on the chosen option
@@ -31,8 +44,9 @@ artifacts:
       Create a design document explaining HOW to implement.
       Apply DRY, KISS, and YAGNI throughout: no duplication, simplest
       solution that works, and nothing beyond what the proposal requires.
+      Use the selected approach and user feedback from brainstorm-review.
     requires:
-      - brainstorm
+      - brainstorm-review
 
   - id: test
     generates: test.md
