@@ -1,4 +1,4 @@
-schema: flow-engine
+schema: workflow
 
 # Project context (optional)
 # This is shown to AI when creating artifacts.

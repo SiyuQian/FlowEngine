@@ -1,0 +1,57 @@
+name: workflow
+version: 1
+description: Siyu's test workflow to make changes applied and tested properly
+
+artifacts:
+  - id: proposal
+    generates: proposal.md
+    description: Initial proposal document
+    template: proposal.md
+    instruction: |
+      Create a proposal that explains WHY this change is needed.
+      Focus on the problem, not the solution.
+    requires: []
+
+  - id: brainstorm
+    generates: brainstorm.md
+    description: Explore multiple candidate approaches before committing to a design
+    template: brainstorm.md
+    instruction: |
+      Brainstorm 2-3 candidate approaches for HOW to solve the problem.
+      For each approach, describe it and list pros, cons, and trade-offs.
+      End with a recommendation for which approach to carry into design.
+    requires:
+      - proposal
+
+  - id: design
+    generates: design.md
+    description: Technical design
+    template: design.md
+    instruction: |
+      Create a design document explaining HOW to implement.
+      Apply DRY, KISS, and YAGNI throughout: no duplication, simplest
+      solution that works, and nothing beyond what the proposal requires.
+    requires:
+      - brainstorm
+
+  - id: test
+    generates: test.md
+    description: Follow TDD workflow and create full test plans before we start executing tasks
+    template: test.md
+    instruction: |
+      Define test cases BEFORE implementation using the design as input.
+      Cover happy paths, edge cases, and error paths.
+      Use Given/When/Then format for each scenario.
+    requires:
+      - design
+
+  - id: tasks
+    generates: tasks.md
+    description: Implementation checklist
+    template: tasks.md
+    requires:
+      - design
+
+apply:
+  requires: [tasks]
+  tracks: tasks.md
