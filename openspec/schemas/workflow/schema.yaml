@@ -5,7 +5,7 @@ description: Siyu's test workflow to make changes applied and tested properly
 artifacts:
   - id: proposal
     generates: proposal.md
-    description: Initial proposal document
+    description: Define the problem and motivation for the change
     template: proposal.md
     instruction: |
       Create a proposal that explains WHY this change is needed.
@@ -14,7 +14,7 @@ artifacts:
 
   - id: brainstorm
     generates: brainstorm.md
-    description: Explore multiple candidate approaches before committing to a design
+    description: Explore candidate approaches with pros, cons, and trade-offs
     template: brainstorm.md
     instruction: |
       Brainstorm 2-3 candidate approaches for HOW to solve the problem.
@@ -25,7 +25,7 @@ artifacts:
 
   - id: design
     generates: design.md
-    description: Technical design
+    description: Detail the technical approach based on the chosen option
     template: design.md
     instruction: |
       Create a design document explaining HOW to implement.
@@ -36,22 +36,31 @@ artifacts:
 
   - id: test
     generates: test.md
-    description: Follow TDD workflow and create full test plans before we start executing tasks
+    description: Define test cases and implementation-ready test code specs before implementation
     template: test.md
     instruction: |
       Define test cases BEFORE implementation using the design as input.
       Cover happy paths, edge cases, and error paths.
       Use Given/When/Then format for each scenario.
+
+      For each test case, also specify:
+      - The target test file path
+      - The test framework and utilities to use
+      - A code skeleton that can be copied directly into the codebase
+      Match the language and framework conventions of the project.
+      The goal is that during implementation, tests can be written first
+      by following this plan with minimal interpretation.
     requires:
       - design
 
   - id: tasks
     generates: tasks.md
-    description: Implementation checklist
+    description: Break down the design and test plan into executable tasks
     template: tasks.md
     requires:
       - design
+      - test
 
 apply:
-  requires: [tasks]
+  requires: [tasks, test]
   tracks: tasks.md
